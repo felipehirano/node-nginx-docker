@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  node:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    image: felipeken/node
+    container_name: node
+    networks:
+      - node-network
+    ports:
+      - "3000:3000"
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: felipeken/nginx
+    container_name: nginx
+    networks:
+      - node-network
+    ports:
+      - "8080:80"
+networks:
+  node-network:
+    driver: bridge
