@@ -1,6 +1,21 @@
 const express = require("express");
+const mysql = require("mysql");
+
 const app = express();
 const port = 3000;
+
+const config = {
+  host: "db", // É o nome do container/servico criado pelo docker-compose
+  user: "root",
+  password: "root",
+  database: "nodedb",
+};
+
+const connection = mysql.createConnection(config);
+
+const sql = `INSERT INTO people(name) values('Ken'),('Thiago'),('Lucas')`;
+connection.query(sql);
+connection.end();
 
 app.get("/", (req, res) => {
   res.send("<h1>NODEJS RUNNING!</h1>");
