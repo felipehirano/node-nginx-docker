@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
     if (err) {
       throw err;
     }
-    res.send(`<h1>NODEJS RUNNING!</h1>
+    res.send(`<h1>Full Cycle Rocks!</h1>
                 <ul>
                   <li>${results[0].name}</li>
                   <li>${results[1].name}</li>
