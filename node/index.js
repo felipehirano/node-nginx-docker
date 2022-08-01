@@ -11,14 +11,25 @@ const config = {
   database: "nodedb",
 };
 
-const connection = mysql.createConnection(config);
-
-const sql = `INSERT INTO people(name) values('Ken'),('Thiago'),('Lucas')`;
-connection.query(sql);
-connection.end();
-
 app.get("/", (req, res) => {
-  res.send("<h1>NODEJS RUNNING!</h1>");
+  const connection = mysql.createConnection(config);
+  const sql = `INSERT INTO people(name) values('Ken'),('Thiago'),('Lucas')`;
+  connection.query(sql);
+
+  connection.query(`SELECT * from people`, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    console.log(results[0]);
+    res.send(`<h1>NODEJS RUNNING!</h1>
+                <ul>
+                  <li>${results[0].name}</li>
+                  <li>${results[1].name}</li>
+                  <li>${results[2].name}</li>
+                </ul>`);
+  });
+
+  connection.end();
 });
 
 app.listen(port, () => {
