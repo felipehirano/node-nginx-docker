@@ -20,7 +20,6 @@ app.get("/", (req, res) => {
     if (err) {
       throw err;
     }
-    console.log(results[0]);
     res.send(`<h1>NODEJS RUNNING!</h1>
                 <ul>
                   <li>${results[0].name}</li>
